@@ -241,8 +241,8 @@ function updateStats(model) {
   els.hitDateValue.textContent = model.hitDate
     ? `At YTD pace: ${formatDate(model.hitDate)}`
     : "No hit date at current pace";
-  els.recentPace.textContent = `${fmtDecimal(model.recentAverage)} / day`;
-  els.recentProjection.textContent = `Recent pace projects ${fmtNumber(model.recentProjection)}`;
+  els.recentPace.textContent = fmtDecimal(model.recentAverage);
+  els.recentProjection.textContent = `per day; projects ${fmtNumber(model.recentProjection)}`;
   els.trajectorySubhead.textContent = `${formatDate(model.yearStart)} to ${formatDate(model.asOf)}; target line at ${fmtNumber(model.target)}.`;
 }
 
