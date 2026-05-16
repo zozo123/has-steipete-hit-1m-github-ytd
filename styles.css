@@ -341,9 +341,6 @@ h2 {
 }
 
 .stat-card {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  align-items: end;
   min-width: 0;
   min-height: 154px;
   overflow: hidden;
@@ -351,13 +348,15 @@ h2 {
 }
 
 .stat-card.small {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: end;
   min-height: 128px;
 }
 
 .stat-value,
 .compact-value {
-  align-self: end;
-  margin: 14px 0 0;
+  margin: 12px 0 0;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
   line-height: 1;
@@ -376,7 +375,6 @@ h2 {
 }
 
 .stat-note {
-  align-self: start;
   margin: 10px 0 0;
   color: var(--muted);
   font-size: 0.95rem;
@@ -528,6 +526,8 @@ input[type="date"] {
 }
 
 .breakdown-grid .stat-value {
+  align-self: end;
+  margin-top: 14px;
   font-size: clamp(1.9rem, 2.5vw, 2.25rem);
 }
 
