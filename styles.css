@@ -99,7 +99,7 @@ input:focus-visible {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
   gap: 18px;
-  align-items: stretch;
+  align-items: start;
   padding-top: 16px;
 }
 
@@ -131,7 +131,7 @@ input:focus-visible {
 h1,
 h2,
 p {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 h1 {
@@ -210,8 +210,7 @@ h2 {
 .target-panel {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 28px;
+  gap: 22px;
   padding: 26px;
 }
 
@@ -226,9 +225,11 @@ h2 {
 
 .target-count {
   display: block;
-  font-size: clamp(2.1rem, 5vw, 4rem);
+  min-width: 0;
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
   font-weight: 900;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .meter {
@@ -252,10 +253,12 @@ h2 {
 .target-foot span:first-child {
   font-size: 2rem;
   font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .target-foot span:last-child {
-  max-width: 200px;
+  max-width: 180px;
   color: var(--muted);
   text-align: right;
 }
@@ -282,6 +285,8 @@ h2 {
   font-weight: 900;
   line-height: 1;
   letter-spacing: 0;
+  overflow-wrap: normal;
+  white-space: nowrap;
 }
 
 .stat-value {
@@ -440,7 +445,11 @@ input[type="date"] {
 }
 
 .breakdown-grid {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.breakdown-grid .stat-value {
+  font-size: clamp(1.9rem, 2.5vw, 2.25rem);
 }
 
 @media (max-width: 960px) {
