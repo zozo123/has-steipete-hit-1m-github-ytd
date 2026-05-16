@@ -36,7 +36,7 @@ git push -u origin main
 Then set the repository Pages source to **GitHub Actions** in
 `Settings -> Pages`.
 
-The scheduled workflow runs every 6 hours and can also be started manually from
+The scheduled workflow runs every 12 hours and can also be started manually from
 the Actions tab.
 
 ## Notes
