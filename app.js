@@ -34,6 +34,7 @@ window.addEventListener("resize", debounce(() => {
 
 async function init() {
   bindElements();
+  setupThemeToggle();
 
   try {
     const response = await fetch(`${DATA_URL}?v=${Date.now()}`, { cache: "no-store" });
@@ -86,9 +87,36 @@ function bindElements() {
     "prsCount",
     "issuesCount",
     "reviewsCount",
+    "themeToggle",
   ].forEach((id) => {
     els[id] = document.getElementById(id);
   });
+}
+
+function setupThemeToggle() {
+  const current = document.documentElement.dataset.theme || "light";
+  updateThemeButton(current);
+
+  els.themeToggle.addEventListener("click", () => {
+    const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      // Theme still changes for the current session when storage is blocked.
+    }
+    updateThemeButton(next);
+
+    if (state.data) {
+      render();
+    }
+  });
+}
+
+function updateThemeButton(theme) {
+  const nextTheme = theme === "dark" ? "light" : "dark";
+  els.themeToggle.setAttribute("aria-label", `Switch to ${nextTheme} mode`);
+  els.themeToggle.title = `Switch to ${nextTheme} mode`;
 }
 
 function normalizeData(payload) {
@@ -307,7 +335,7 @@ function renderHeatmap(model) {
     const square = document.createElement("span");
     const ratio = day.count / max;
     square.className = "day";
-    square.style.backgroundColor = day.color || heatColor(ratio);
+    square.style.backgroundColor = day.count === 0 ? cssVar("--heat-empty") : day.color || heatColor(ratio);
     square.title = `${formatDate(day.date)}: ${fmtNumber(day.count)} contributions`;
     square.setAttribute("aria-label", square.title);
     fragment.appendChild(square);
@@ -349,22 +377,22 @@ function drawTrajectory(model) {
     actualPoints.push([xForDate(day.date), yForValue(cumulative)]);
   });
 
-  drawLine(ctx, actualPoints, "#1f883d", 3);
+  drawLine(ctx, actualPoints, cssVar("--green"), 3);
 
   const projectedPoints = [
     [xForDate(model.asOf), yForValue(model.ytdTotal)],
     [xForDate(model.yearEnd), yForValue(model.trendProjection)],
   ];
-  drawLine(ctx, projectedPoints, "#245db5", 2.5, [8, 6]);
+  drawLine(ctx, projectedPoints, cssVar("--blue"), 2.5, [8, 6]);
 
   drawAxisLabels(ctx, model, pad, width, height, yMax);
 }
 
 function drawGrid(ctx, pad, width, height, yMax) {
   ctx.save();
-  ctx.strokeStyle = "#e4e9e2";
+  ctx.strokeStyle = cssVar("--grid-line");
   ctx.lineWidth = 1;
-  ctx.fillStyle = "#626b66";
+  ctx.fillStyle = cssVar("--muted");
   ctx.font = "12px system-ui, sans-serif";
   ctx.textAlign = "right";
   ctx.textBaseline = "middle";
@@ -384,7 +412,7 @@ function drawGrid(ctx, pad, width, height, yMax) {
 
 function drawTarget(ctx, x1, x2, y) {
   ctx.save();
-  ctx.strokeStyle = "#a16207";
+  ctx.strokeStyle = cssVar("--amber");
   ctx.lineWidth = 2;
   ctx.setLineDash([5, 5]);
   ctx.beginPath();
@@ -545,7 +573,7 @@ function shortNumber(value) {
 
 function heatColor(ratio) {
   if (ratio <= 0) {
-    return "#ebedf0";
+    return cssVar("--heat-empty");
   }
   if (ratio < 0.25) {
     return "#9be9a8";
@@ -557,6 +585,10 @@ function heatColor(ratio) {
     return "#30a14e";
   }
   return "#216e39";
+}
+
+function cssVar(name) {
+  return window.getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 }
 
 function isStale(generatedAt) {
