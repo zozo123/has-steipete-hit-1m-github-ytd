@@ -1,0 +1,866 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-16T22:43:19.343Z",
+  "source": {
+    "name": "GitHub GraphQL API",
+    "profileUrl": "https://github.com/steipete?tab=overview&from=2026-01-01&to=2026-05-16",
+    "graphqlField": "user.contributionsCollection.contributionCalendar"
+  },
+  "subject": {
+    "login": "steipete",
+    "name": "Peter Steinberger",
+    "url": "https://github.com/steipete",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/58493?s=160&u=95a4fccef3d341039661c427695691a664e333ba&v=4"
+  },
+  "target": {
+    "count": 1000000,
+    "label": "1M YTD contributions"
+  },
+  "period": {
+    "year": 2026,
+    "fromDate": "2026-01-01",
+    "toDate": "2026-05-16",
+    "asOfDate": "2026-05-16",
+    "fromDateTime": "2026-01-01T00:00:00Z",
+    "toDateTime": "2026-05-16T22:43:17.554Z",
+    "daysReturned": 136
+  },
+  "totals": {
+    "ytd": 203268,
+    "calendar": 203268,
+    "publicCategories": 34387,
+    "restricted": 168880,
+    "commits": 33428,
+    "issues": 34,
+    "pullRequests": 729,
+    "pullRequestReviews": 176,
+    "repositories": 20
+  },
+  "days": [
+    {
+      "date": "2026-01-01",
+      "count": 1170,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-01-02",
+      "count": 1406,
+      "color": "#9be9a8",
+      "weekday": 5
+    },
+    {
+      "date": "2026-01-03",
+      "count": 1833,
+      "color": "#40c463",
+      "weekday": 6
+    },
+    {
+      "date": "2026-01-04",
+      "count": 1353,
+      "color": "#9be9a8",
+      "weekday": 0
+    },
+    {
+      "date": "2026-01-05",
+      "count": 1456,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-01-06",
+      "count": 1864,
+      "color": "#40c463",
+      "weekday": 2
+    },
+    {
+      "date": "2026-01-07",
+      "count": 1803,
+      "color": "#40c463",
+      "weekday": 3
+    },
+    {
+      "date": "2026-01-08",
+      "count": 2785,
+      "color": "#40c463",
+      "weekday": 4
+    },
+    {
+      "date": "2026-01-09",
+      "count": 3631,
+      "color": "#30a14e",
+      "weekday": 5
+    },
+    {
+      "date": "2026-01-10",
+      "count": 2591,
+      "color": "#40c463",
+      "weekday": 6
+    },
+    {
+      "date": "2026-01-11",
+      "count": 1665,
+      "color": "#40c463",
+      "weekday": 0
+    },
+    {
+      "date": "2026-01-12",
+      "count": 2944,
+      "color": "#40c463",
+      "weekday": 1
+    },
+    {
+      "date": "2026-01-13",
+      "count": 1620,
+      "color": "#40c463",
+      "weekday": 2
+    },
+    {
+      "date": "2026-01-14",
+      "count": 631,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-01-15",
+      "count": 2070,
+      "color": "#40c463",
+      "weekday": 4
+    },
+    {
+      "date": "2026-01-16",
+      "count": 1793,
+      "color": "#40c463",
+      "weekday": 5
+    },
+    {
+      "date": "2026-01-17",
+      "count": 2724,
+      "color": "#40c463",
+      "weekday": 6
+    },
+    {
+      "date": "2026-01-18",
+      "count": 2698,
+      "color": "#40c463",
+      "weekday": 0
+    },
+    {
+      "date": "2026-01-19",
+      "count": 868,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-01-20",
+      "count": 1782,
+      "color": "#40c463",
+      "weekday": 2
+    },
+    {
+      "date": "2026-01-21",
+      "count": 1877,
+      "color": "#40c463",
+      "weekday": 3
+    },
+    {
+      "date": "2026-01-22",
+      "count": 1684,
+      "color": "#40c463",
+      "weekday": 4
+    },
+    {
+      "date": "2026-01-23",
+      "count": 1520,
+      "color": "#40c463",
+      "weekday": 5
+    },
+    {
+      "date": "2026-01-24",
+      "count": 1743,
+      "color": "#40c463",
+      "weekday": 6
+    },
+    {
+      "date": "2026-01-25",
+      "count": 980,
+      "color": "#9be9a8",
+      "weekday": 0
+    },
+    {
+      "date": "2026-01-26",
+      "count": 402,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-01-27",
+      "count": 324,
+      "color": "#9be9a8",
+      "weekday": 2
+    },
+    {
+      "date": "2026-01-28",
+      "count": 96,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-01-29",
+      "count": 58,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-01-30",
+      "count": 227,
+      "color": "#9be9a8",
+      "weekday": 5
+    },
+    {
+      "date": "2026-01-31",
+      "count": 180,
+      "color": "#9be9a8",
+      "weekday": 6
+    },
+    {
+      "date": "2026-02-01",
+      "count": 203,
+      "color": "#9be9a8",
+      "weekday": 0
+    },
+    {
+      "date": "2026-02-02",
+      "count": 324,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-02-03",
+      "count": 245,
+      "color": "#9be9a8",
+      "weekday": 2
+    },
+    {
+      "date": "2026-02-04",
+      "count": 93,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-02-05",
+      "count": 75,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-02-06",
+      "count": 220,
+      "color": "#9be9a8",
+      "weekday": 5
+    },
+    {
+      "date": "2026-02-07",
+      "count": 66,
+      "color": "#9be9a8",
+      "weekday": 6
+    },
+    {
+      "date": "2026-02-08",
+      "count": 0,
+      "color": "#ebedf0",
+      "weekday": 0
+    },
+    {
+      "date": "2026-02-09",
+      "count": 141,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-02-10",
+      "count": 12,
+      "color": "#9be9a8",
+      "weekday": 2
+    },
+    {
+      "date": "2026-02-11",
+      "count": 28,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-02-12",
+      "count": 56,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-02-13",
+      "count": 1476,
+      "color": "#9be9a8",
+      "weekday": 5
+    },
+    {
+      "date": "2026-02-14",
+      "count": 4479,
+      "color": "#30a14e",
+      "weekday": 6
+    },
+    {
+      "date": "2026-02-15",
+      "count": 4372,
+      "color": "#30a14e",
+      "weekday": 0
+    },
+    {
+      "date": "2026-02-16",
+      "count": 4298,
+      "color": "#30a14e",
+      "weekday": 1
+    },
+    {
+      "date": "2026-02-17",
+      "count": 604,
+      "color": "#9be9a8",
+      "weekday": 2
+    },
+    {
+      "date": "2026-02-18",
+      "count": 2750,
+      "color": "#40c463",
+      "weekday": 3
+    },
+    {
+      "date": "2026-02-19",
+      "count": 2098,
+      "color": "#40c463",
+      "weekday": 4
+    },
+    {
+      "date": "2026-02-20",
+      "count": 0,
+      "color": "#ebedf0",
+      "weekday": 5
+    },
+    {
+      "date": "2026-02-21",
+      "count": 3252,
+      "color": "#30a14e",
+      "weekday": 6
+    },
+    {
+      "date": "2026-02-22",
+      "count": 5240,
+      "color": "#216e39",
+      "weekday": 0
+    },
+    {
+      "date": "2026-02-23",
+      "count": 1004,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-02-24",
+      "count": 1602,
+      "color": "#40c463",
+      "weekday": 2
+    },
+    {
+      "date": "2026-02-25",
+      "count": 715,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-02-26",
+      "count": 1960,
+      "color": "#40c463",
+      "weekday": 4
+    },
+    {
+      "date": "2026-02-27",
+      "count": 82,
+      "color": "#9be9a8",
+      "weekday": 5
+    },
+    {
+      "date": "2026-02-28",
+      "count": 0,
+      "color": "#ebedf0",
+      "weekday": 6
+    },
+    {
+      "date": "2026-03-01",
+      "count": 252,
+      "color": "#9be9a8",
+      "weekday": 0
+    },
+    {
+      "date": "2026-03-02",
+      "count": 4228,
+      "color": "#30a14e",
+      "weekday": 1
+    },
+    {
+      "date": "2026-03-03",
+      "count": 1557,
+      "color": "#40c463",
+      "weekday": 2
+    },
+    {
+      "date": "2026-03-04",
+      "count": 0,
+      "color": "#ebedf0",
+      "weekday": 3
+    },
+    {
+      "date": "2026-03-05",
+      "count": 4,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-03-06",
+      "count": 1,
+      "color": "#9be9a8",
+      "weekday": 5
+    },
+    {
+      "date": "2026-03-07",
+      "count": 2057,
+      "color": "#40c463",
+      "weekday": 6
+    },
+    {
+      "date": "2026-03-08",
+      "count": 1892,
+      "color": "#40c463",
+      "weekday": 0
+    },
+    {
+      "date": "2026-03-09",
+      "count": 487,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-03-10",
+      "count": 207,
+      "color": "#9be9a8",
+      "weekday": 2
+    },
+    {
+      "date": "2026-03-11",
+      "count": 287,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-03-12",
+      "count": 415,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-03-13",
+      "count": 4984,
+      "color": "#216e39",
+      "weekday": 5
+    },
+    {
+      "date": "2026-03-14",
+      "count": 1420,
+      "color": "#9be9a8",
+      "weekday": 6
+    },
+    {
+      "date": "2026-03-15",
+      "count": 924,
+      "color": "#9be9a8",
+      "weekday": 0
+    },
+    {
+      "date": "2026-03-16",
+      "count": 1319,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-03-17",
+      "count": 2444,
+      "color": "#40c463",
+      "weekday": 2
+    },
+    {
+      "date": "2026-03-18",
+      "count": 261,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-03-19",
+      "count": 171,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-03-20",
+      "count": 249,
+      "color": "#9be9a8",
+      "weekday": 5
+    },
+    {
+      "date": "2026-03-21",
+      "count": 120,
+      "color": "#9be9a8",
+      "weekday": 6
+    },
+    {
+      "date": "2026-03-22",
+      "count": 2762,
+      "color": "#40c463",
+      "weekday": 0
+    },
+    {
+      "date": "2026-03-23",
+      "count": 1549,
+      "color": "#40c463",
+      "weekday": 1
+    },
+    {
+      "date": "2026-03-24",
+      "count": 975,
+      "color": "#9be9a8",
+      "weekday": 2
+    },
+    {
+      "date": "2026-03-25",
+      "count": 432,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-03-26",
+      "count": 980,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-03-27",
+      "count": 2163,
+      "color": "#40c463",
+      "weekday": 5
+    },
+    {
+      "date": "2026-03-28",
+      "count": 2511,
+      "color": "#40c463",
+      "weekday": 6
+    },
+    {
+      "date": "2026-03-29",
+      "count": 670,
+      "color": "#9be9a8",
+      "weekday": 0
+    },
+    {
+      "date": "2026-03-30",
+      "count": 515,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-03-31",
+      "count": 795,
+      "color": "#9be9a8",
+      "weekday": 2
+    },
+    {
+      "date": "2026-04-01",
+      "count": 1082,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-04-02",
+      "count": 440,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-04-03",
+      "count": 2581,
+      "color": "#40c463",
+      "weekday": 5
+    },
+    {
+      "date": "2026-04-04",
+      "count": 6016,
+      "color": "#216e39",
+      "weekday": 6
+    },
+    {
+      "date": "2026-04-05",
+      "count": 3036,
+      "color": "#30a14e",
+      "weekday": 0
+    },
+    {
+      "date": "2026-04-06",
+      "count": 5359,
+      "color": "#216e39",
+      "weekday": 1
+    },
+    {
+      "date": "2026-04-07",
+      "count": 5206,
+      "color": "#216e39",
+      "weekday": 2
+    },
+    {
+      "date": "2026-04-08",
+      "count": 2235,
+      "color": "#40c463",
+      "weekday": 3
+    },
+    {
+      "date": "2026-04-09",
+      "count": 723,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-04-10",
+      "count": 2527,
+      "color": "#40c463",
+      "weekday": 5
+    },
+    {
+      "date": "2026-04-11",
+      "count": 2295,
+      "color": "#40c463",
+      "weekday": 6
+    },
+    {
+      "date": "2026-04-12",
+      "count": 512,
+      "color": "#9be9a8",
+      "weekday": 0
+    },
+    {
+      "date": "2026-04-13",
+      "count": 344,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-04-14",
+      "count": 226,
+      "color": "#9be9a8",
+      "weekday": 2
+    },
+    {
+      "date": "2026-04-15",
+      "count": 387,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-04-16",
+      "count": 297,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-04-17",
+      "count": 1755,
+      "color": "#40c463",
+      "weekday": 5
+    },
+    {
+      "date": "2026-04-18",
+      "count": 1654,
+      "color": "#40c463",
+      "weekday": 6
+    },
+    {
+      "date": "2026-04-19",
+      "count": 1161,
+      "color": "#9be9a8",
+      "weekday": 0
+    },
+    {
+      "date": "2026-04-20",
+      "count": 4087,
+      "color": "#30a14e",
+      "weekday": 1
+    },
+    {
+      "date": "2026-04-21",
+      "count": 1508,
+      "color": "#40c463",
+      "weekday": 2
+    },
+    {
+      "date": "2026-04-22",
+      "count": 2249,
+      "color": "#40c463",
+      "weekday": 3
+    },
+    {
+      "date": "2026-04-23",
+      "count": 3998,
+      "color": "#30a14e",
+      "weekday": 4
+    },
+    {
+      "date": "2026-04-24",
+      "count": 2943,
+      "color": "#40c463",
+      "weekday": 5
+    },
+    {
+      "date": "2026-04-25",
+      "count": 4122,
+      "color": "#30a14e",
+      "weekday": 6
+    },
+    {
+      "date": "2026-04-26",
+      "count": 2731,
+      "color": "#40c463",
+      "weekday": 0
+    },
+    {
+      "date": "2026-04-27",
+      "count": 3864,
+      "color": "#30a14e",
+      "weekday": 1
+    },
+    {
+      "date": "2026-04-28",
+      "count": 2076,
+      "color": "#40c463",
+      "weekday": 2
+    },
+    {
+      "date": "2026-04-29",
+      "count": 1632,
+      "color": "#40c463",
+      "weekday": 3
+    },
+    {
+      "date": "2026-04-30",
+      "count": 634,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-05-01",
+      "count": 954,
+      "color": "#9be9a8",
+      "weekday": 5
+    },
+    {
+      "date": "2026-05-02",
+      "count": 1534,
+      "color": "#40c463",
+      "weekday": 6
+    },
+    {
+      "date": "2026-05-03",
+      "count": 557,
+      "color": "#9be9a8",
+      "weekday": 0
+    },
+    {
+      "date": "2026-05-04",
+      "count": 595,
+      "color": "#9be9a8",
+      "weekday": 1
+    },
+    {
+      "date": "2026-05-05",
+      "count": 472,
+      "color": "#9be9a8",
+      "weekday": 2
+    },
+    {
+      "date": "2026-05-06",
+      "count": 613,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-05-07",
+      "count": 555,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-05-08",
+      "count": 1336,
+      "color": "#9be9a8",
+      "weekday": 5
+    },
+    {
+      "date": "2026-05-09",
+      "count": 2046,
+      "color": "#40c463",
+      "weekday": 6
+    },
+    {
+      "date": "2026-05-10",
+      "count": 1901,
+      "color": "#40c463",
+      "weekday": 0
+    },
+    {
+      "date": "2026-05-11",
+      "count": 1632,
+      "color": "#40c463",
+      "weekday": 1
+    },
+    {
+      "date": "2026-05-12",
+      "count": 1239,
+      "color": "#9be9a8",
+      "weekday": 2
+    },
+    {
+      "date": "2026-05-13",
+      "count": 960,
+      "color": "#9be9a8",
+      "weekday": 3
+    },
+    {
+      "date": "2026-05-14",
+      "count": 286,
+      "color": "#9be9a8",
+      "weekday": 4
+    },
+    {
+      "date": "2026-05-15",
+      "count": 763,
+      "color": "#9be9a8",
+      "weekday": 5
+    },
+    {
+      "date": "2026-05-16",
+      "count": 341,
+      "color": "#9be9a8",
+      "weekday": 6
+    }
+  ],
+  "rateLimit": {
+    "cost": 1,
+    "remaining": 4994,
+    "resetAt": "2026-05-16T22:55:31Z"
+  },
+  "caveats": [
+    "GitHub-visible totals can include restricted private contribution counts when the profile exposes them.",
+    "The public static page receives only the generated JSON snapshot, never the GitHub token."
+  ]
+}

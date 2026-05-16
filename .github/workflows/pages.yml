@@ -1,0 +1,71 @@
+name: Refresh data and deploy Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      login:
+        description: GitHub username to track
+        required: false
+        default: steipete
+      target:
+        description: Contribution target
+        required: false
+        default: "1000000"
+  schedule:
+    - cron: "17 */12 * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Refresh contribution data
+        run: node scripts/fetch-contributions.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_STATS_TOKEN || github.token }}
+          TARGET_USER: ${{ inputs.login || 'steipete' }}
+          TARGET_COUNT: ${{ inputs.target || '1000000' }}
+
+      - name: Prepare static artifact
+        run: |
+          mkdir -p _site/data
+          cp index.html styles.css app.js .nojekyll _site/
+          cp data/steipete.json _site/data/steipete.json
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

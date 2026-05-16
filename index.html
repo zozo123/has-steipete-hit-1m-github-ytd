@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Static GitHub Pages dashboard tracking whether steipete has hit 1M GitHub YTD contributions."
+    >
+    <title>Has steipete hit 1M GitHub YTD?</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Dashboard home">
+        <span class="brand-mark" aria-hidden="true">1M</span>
+        <span>steipete YTD</span>
+      </a>
+      <nav class="top-links" aria-label="External links">
+        <a id="profileRangeLink" href="https://github.com/steipete?tab=overview">GitHub range</a>
+        <a href="https://github.com/zozo123/has-steipete-hit-1m-github-ytd">Source</a>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <section class="hero-grid" aria-labelledby="pageTitle">
+        <div class="hero-copy">
+          <p class="eyebrow">GitHub-visible YTD contributions</p>
+          <h1 id="pageTitle">Has steipete hit 1M?</h1>
+          <div class="answer-row">
+            <p id="answerLabel" class="answer loading">Loading</p>
+            <p id="answerDetail" class="answer-detail">Fetching latest published snapshot.</p>
+          </div>
+          <div class="person">
+            <img id="avatar" alt="" class="avatar" width="48" height="48">
+            <div>
+              <p id="personName" class="person-name">steipete</p>
+              <p id="updatedAt" class="muted">Waiting for data</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="target-panel" aria-label="Target progress">
+          <div class="target-head">
+            <span id="targetCount" class="target-count">1,000,000</span>
+            <span class="muted">target</span>
+          </div>
+          <div class="meter" aria-hidden="true">
+            <span id="progressBar"></span>
+          </div>
+          <div class="target-foot">
+            <span id="progressValue">0%</span>
+            <span id="remainingLabel">Calculating</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Headline metrics">
+        <article class="stat-card">
+          <p class="stat-label">YTD total</p>
+          <p id="ytdTotal" class="stat-value">-</p>
+          <p id="ytdPace" class="stat-note">-</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Gap to 1M</p>
+          <p id="gapValue" class="stat-value">-</p>
+          <p id="requiredValue" class="stat-note">-</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Year-end projection</p>
+          <p id="projectedValue" class="stat-value">-</p>
+          <p id="hitDateValue" class="stat-note">-</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Recent pace</p>
+          <p id="recentPace" class="stat-value">-</p>
+          <p id="recentProjection" class="stat-note">-</p>
+        </article>
+      </section>
+
+      <section class="work-area">
+        <article class="panel trajectory-panel">
+          <div class="panel-head">
+            <div>
+              <h2>Trajectory</h2>
+              <p id="trajectorySubhead" class="muted">-</p>
+            </div>
+            <div class="legend" aria-label="Chart legend">
+              <span><i class="legend-actual"></i>Actual</span>
+              <span><i class="legend-projected"></i>Projected</span>
+              <span><i class="legend-target"></i>Target</span>
+            </div>
+          </div>
+          <canvas id="trajectoryChart" class="chart" height="320" aria-label="YTD contribution trajectory chart"></canvas>
+        </article>
+
+        <aside class="panel controls-panel">
+          <h2>Now vs YTD</h2>
+          <form class="range-form" id="rangeForm">
+            <label>
+              <span>From</span>
+              <input id="fromDate" type="date">
+            </label>
+            <label>
+              <span>To</span>
+              <input id="toDate" type="date">
+            </label>
+          </form>
+          <div class="compare-stack">
+            <div>
+              <p id="selectedRangeLabel" class="stat-label">Selected window</p>
+              <p id="selectedTotal" class="compact-value">-</p>
+              <p id="selectedAvg" class="stat-note">-</p>
+            </div>
+            <div>
+              <p class="stat-label">Pace delta</p>
+              <p id="selectedDelta" class="compact-value">-</p>
+              <p class="stat-note">against the YTD daily average</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel heatmap-panel" aria-labelledby="heatmapTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="heatmapTitle">Daily Contributions</h2>
+            <p id="sourceLine" class="muted">-</p>
+          </div>
+          <span id="statusBadge" class="status-badge">Snapshot</span>
+        </div>
+        <div id="heatmap" class="heatmap" role="img" aria-label="Daily contribution heatmap"></div>
+      </section>
+
+      <section class="stats-grid breakdown-grid" aria-label="Contribution breakdown">
+        <article class="stat-card small">
+          <p class="stat-label">Public categories</p>
+          <p id="publicCount" class="stat-value">-</p>
+        </article>
+        <article class="stat-card small">
+          <p class="stat-label">Restricted count</p>
+          <p id="restrictedCount" class="stat-value">-</p>
+        </article>
+        <article class="stat-card small">
+          <p class="stat-label">Commits</p>
+          <p id="commitsCount" class="stat-value">-</p>
+        </article>
+        <article class="stat-card small">
+          <p class="stat-label">Pull requests</p>
+          <p id="prsCount" class="stat-value">-</p>
+        </article>
+        <article class="stat-card small">
+          <p class="stat-label">Issues</p>
+          <p id="issuesCount" class="stat-value">-</p>
+        </article>
+        <article class="stat-card small">
+          <p class="stat-label">Reviews</p>
+          <p id="reviewsCount" class="stat-value">-</p>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
