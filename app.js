@@ -1,6 +1,22 @@
 const DATA_URL = "data/steipete.json";
 const DAY_MS = 24 * 60 * 60 * 1000;
 const TARGET_DEFAULT = 1_000_000;
+const FIT_METRIC_IDS = [
+  "targetCount",
+  "progressValue",
+  "ytdTotal",
+  "gapValue",
+  "projectedValue",
+  "recentPace",
+  "selectedTotal",
+  "selectedDelta",
+  "publicCount",
+  "restrictedCount",
+  "commitsCount",
+  "prsCount",
+  "issuesCount",
+  "reviewsCount",
+];
 
 const els = {};
 let state = {
@@ -151,6 +167,7 @@ function render() {
   updateBreakdown(model);
   renderHeatmap(model);
   drawTrajectory(model);
+  fitMetricText();
 }
 
 function buildModel(data, from, to) {
@@ -169,10 +186,14 @@ function buildModel(data, from, to) {
   const requiredDaily = daysRemaining > 0 ? safeDivide(gap, daysRemaining) : 0;
   const hitOffset = ytdAverage > 0 ? Math.ceil(target / ytdAverage) - 1 : Infinity;
   const hitDate = Number.isFinite(hitOffset) ? addDays(yearStart, hitOffset) : null;
-  const recentWindow = recentDays(data.days, 30);
-  const recentTotal = recentWindow.reduce((sum, day) => sum + day.count, 0);
-  const recentAverage = safeDivide(recentTotal, recentWindow.length);
+  const recentWindow = trailingDays(data.days, 30);
+  const recentAverage = averageDayCount(recentWindow);
   const recentProjection = Math.round(ytdTotal + recentAverage * daysRemaining);
+  const current14Average = averageDayCount(trailingDays(data.days, 14));
+  const previous14Average = averageDayCount(trailingDays(data.days, 14, 14));
+  const paceDelta = current14Average - previous14Average;
+  const trendAverage = Math.max(0, recentAverage + paceDelta * 0.5);
+  const trendProjection = Math.round(ytdTotal + trendAverage * daysRemaining);
   const selectedDays = data.days.filter((day) => day.date >= from && day.date <= to);
   const selectedTotal = selectedDays.reduce((sum, day) => sum + day.count, 0);
   const selectedAverage = safeDivide(selectedTotal, selectedDays.length);
@@ -199,6 +220,11 @@ function buildModel(data, from, to) {
     recentWindow,
     recentAverage,
     recentProjection,
+    current14Average,
+    previous14Average,
+    paceDelta,
+    trendAverage,
+    trendProjection,
     selectedDays,
     selectedTotal,
     selectedAverage,
@@ -241,9 +267,9 @@ function updateStats(model) {
   els.hitDateValue.textContent = model.hitDate
     ? `At YTD pace: ${formatDate(model.hitDate)}`
     : "No hit date at current pace";
-  els.recentPace.textContent = fmtDecimal(model.recentAverage);
-  els.recentProjection.textContent = `per day; projects ${fmtNumber(model.recentProjection)}`;
-  els.trajectorySubhead.textContent = `${formatDate(model.yearStart)} to ${formatDate(model.asOf)}; target line at ${fmtNumber(model.target)}.`;
+  els.recentPace.textContent = fmtNumber(model.trendProjection);
+  els.recentProjection.textContent = `${fmtDecimal(model.trendAverage)} per day; ${signedDecimal(model.paceDelta)} vs prior 14d`;
+  els.trajectorySubhead.textContent = `${formatDate(model.yearStart)} to ${formatDate(model.asOf)}; trend forecast ${fmtNumber(model.trendProjection)}.`;
 }
 
 function updateComparison(model) {
@@ -304,7 +330,7 @@ function drawTrajectory(model) {
   const pad = { top: 22, right: 18, bottom: 36, left: 58 };
   const width = rect.width - pad.left - pad.right;
   const height = 320 - pad.top - pad.bottom;
-  const yMax = Math.max(model.target, model.projectedYearEnd, model.recentProjection, model.ytdTotal) * 1.05;
+  const yMax = Math.max(model.target, model.projectedYearEnd, model.trendProjection, model.ytdTotal) * 1.05;
   const daysInYear = model.daysInYear;
 
   const xForDate = (date) => {
@@ -327,7 +353,7 @@ function drawTrajectory(model) {
 
   const projectedPoints = [
     [xForDate(model.asOf), yForValue(model.ytdTotal)],
-    [xForDate(model.yearEnd), yForValue(model.projectedYearEnd)],
+    [xForDate(model.yearEnd), yForValue(model.trendProjection)],
   ];
   drawLine(ctx, projectedPoints, "#245db5", 2.5, [8, 6]);
 
@@ -409,8 +435,16 @@ function sumRange(days, from, to) {
     .reduce((sum, day) => sum + day.count, 0);
 }
 
-function recentDays(days, size) {
-  return days.slice(Math.max(0, days.length - size));
+function trailingDays(days, size, offset = 0) {
+  const end = Math.max(0, days.length - offset);
+  return days.slice(Math.max(0, end - size), end);
+}
+
+function averageDayCount(days) {
+  return safeDivide(
+    days.reduce((sum, day) => sum + day.count, 0),
+    days.length,
+  );
 }
 
 function monthStart(dateString) {
@@ -461,6 +495,11 @@ function fmtDecimal(value) {
     maximumFractionDigits: 1,
     minimumFractionDigits: 1,
   }).format(value);
+}
+
+function signedDecimal(value) {
+  const sign = value >= 0 ? "+" : "";
+  return `${sign}${fmtDecimal(value)}`;
 }
 
 function fmtPercent(value) {
@@ -526,6 +565,27 @@ function isStale(generatedAt) {
   }
 
   return Date.now() - new Date(generatedAt).getTime() > 8 * 60 * 60 * 1000;
+}
+
+function fitMetricText() {
+  window.requestAnimationFrame(() => {
+    FIT_METRIC_IDS.forEach((id) => {
+      const element = els[id];
+      if (!element || !element.clientWidth) {
+        return;
+      }
+
+      element.style.fontSize = "";
+      const computed = window.getComputedStyle(element);
+      let fontSize = Number.parseFloat(computed.fontSize);
+      const minFontSize = element.classList.contains("compact-value") ? 24 : 28;
+
+      while (element.scrollWidth > element.clientWidth && fontSize > minFontSize) {
+        fontSize -= 1;
+        element.style.fontSize = `${fontSize}px`;
+      }
+    });
+  });
 }
 
 function debounce(fn, wait) {

@@ -45,3 +45,13 @@ GitHub contribution totals may include `restrictedContributionsCount` when the
 profile exposes private contribution counts. The dashboard labels this as
 GitHub-visible data because private repository details are not available to the
 public site.
+
+Forecasts stay intentionally simple:
+
+- **YTD pace**: current YTD total divided by elapsed days, projected through
+  December 31.
+- **Recent momentum**: last 30 days averaged and projected through the remaining
+  year.
+- **Trend forecast**: last-30-day pace adjusted by half of the 14-day pace
+  delta versus the prior 14 days. The half-weight keeps the derivative visible
+  without letting a short spike dominate the forecast.
