@@ -39,6 +39,28 @@ Then set the repository Pages source to **GitHub Actions** in
 The scheduled workflow runs every 12 hours and can also be started manually from
 the Actions tab.
 
+## Resilience
+
+A single flaky run used to leave the site stale until the next cron, 12 hours
+later. Three layers now guard against transient failures:
+
+1. `scripts/fetch-contributions.mjs` retries the GraphQL request up to 4 times
+   with exponential backoff on network errors, 5xx, and 429. Non-retryable
+   errors (401, user not found) fail immediately.
+2. `actions/configure-pages` runs with `continue-on-error` — Pages is already
+   enabled, the step only reads config, so a transient API blip cannot block
+   the deploy.
+3. `.github/workflows/retry-failed-deploy.yml` listens for failed completions
+   of the deploy workflow and reruns the failed jobs, capped at 2 retries
+   (`run_attempt < 3`) so a real breakage cannot loop.
+
+A failed build never reaches the deploy job, so the live site keeps serving
+the last good snapshot throughout.
+
+Note: GitHub disables scheduled workflows after 60 days without repository
+activity. If the repo sits untouched that long, any trivial commit revives the
+cron.
+
 ## Notes
 
 GitHub contribution totals may include `restrictedContributionsCount` when the
