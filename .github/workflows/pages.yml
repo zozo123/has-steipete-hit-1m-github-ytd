@@ -51,8 +51,11 @@ jobs:
           cp index.html styles.css app.js .nojekyll _site/
           cp data/steipete.json _site/data/steipete.json
 
+      # Pages is already enabled for this repo; this step only reads config,
+      # so a transient API failure here must not block the deploy.
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        continue-on-error: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

@@ -60,29 +60,57 @@ const query = `
   }
 `;
 
-const response = await fetch(GRAPHQL_ENDPOINT, {
-  method: "POST",
-  headers: {
-    authorization: `Bearer ${token}`,
-    "content-type": "application/json",
-    "user-agent": "has-steipete-hit-1m-github-ytd",
-  },
-  body: JSON.stringify({
-    query,
-    variables: {
-      login,
-      from: fromDateTime,
-      to: toDateTime,
-    },
-  }),
-});
+const MAX_ATTEMPTS = 4;
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-if (!response.ok) {
-  const body = await response.text();
-  throw new Error(`GitHub GraphQL request failed: ${response.status} ${body}`);
+async function requestContributions() {
+  const response = await fetch(GRAPHQL_ENDPOINT, {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${token}`,
+      "content-type": "application/json",
+      "user-agent": "has-steipete-hit-1m-github-ytd",
+    },
+    body: JSON.stringify({
+      query,
+      variables: {
+        login,
+        from: fromDateTime,
+        to: toDateTime,
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    const error = new Error(
+      `GitHub GraphQL request failed: ${response.status} ${body}`,
+    );
+    error.retryable = response.status >= 500 || response.status === 429;
+    throw error;
+  }
+
+  return response.json();
 }
 
-const result = await response.json();
+let result;
+for (let attempt = 1; ; attempt += 1) {
+  try {
+    result = await requestContributions();
+    break;
+  } catch (error) {
+    // Network-level failures (connection reset, DNS) have no .retryable flag.
+    const retryable = error.retryable ?? true;
+    if (!retryable || attempt >= MAX_ATTEMPTS) {
+      throw error;
+    }
+    const delayMs = 2000 * 2 ** (attempt - 1);
+    console.warn(
+      `Attempt ${attempt}/${MAX_ATTEMPTS} failed (${error.message}); retrying in ${delayMs}ms.`,
+    );
+    await sleep(delayMs);
+  }
+}
 
 if (result.errors?.length) {
   throw new Error(`GitHub GraphQL error: ${JSON.stringify(result.errors)}`);

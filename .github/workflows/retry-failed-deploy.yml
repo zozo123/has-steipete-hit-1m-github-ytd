@@ -1,0 +1,27 @@
+name: Retry failed deploy
+
+on:
+  workflow_run:
+    workflows: ["Refresh data and deploy Pages"]
+    types: [completed]
+
+permissions:
+  actions: write
+
+jobs:
+  rerun:
+    # Transient API failures (e.g. "other side closed") occasionally kill a
+    # scheduled run; without this the site stays stale until the next cron,
+    # 12 hours later. Cap at 2 retries so a real breakage cannot loop.
+    if: >
+      github.event.workflow_run.conclusion == 'failure' &&
+      github.event.workflow_run.run_attempt < 3
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rerun failed jobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "Rerunning failed jobs of run ${{ github.event.workflow_run.id }} (attempt ${{ github.event.workflow_run.run_attempt }})"
+          gh run rerun ${{ github.event.workflow_run.id }} --failed \
+            --repo ${{ github.repository }}
