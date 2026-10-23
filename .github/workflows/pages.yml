@@ -48,7 +48,7 @@ jobs:
       - name: Prepare static artifact
         run: |
           mkdir -p _site/data
-          cp index.html styles.css app.js .nojekyll _site/
+          cp index.html styles.css app.js og.png .nojekyll _site/
           cp data/steipete.json _site/data/steipete.json
 
       # Pages is already enabled for this repo; this step only reads config,

@@ -1,6 +1,9 @@
 const DATA_URL = "data/steipete.json";
 const DAY_MS = 24 * 60 * 60 * 1000;
 const TARGET_DEFAULT = 1_000_000;
+// The workflow refreshes every 12 hours; after two days without a refresh the
+// page says so above the headline instead of only in the status badge.
+const STALE_NOTICE_MS = 48 * 60 * 60 * 1000;
 const FIT_METRIC_IDS = [
   "targetCount",
   "progressValue",
@@ -52,6 +55,7 @@ async function init() {
 
 function bindElements() {
   [
+    "staleNotice",
     "answerLabel",
     "answerDetail",
     "avatar",
@@ -281,7 +285,18 @@ function updateHeadline(model) {
   els.progressValue.textContent = fmtPercent(progress);
   els.remainingLabel.textContent = hit ? "Target cleared" : `${fmtNumber(gap)} remaining`;
   els.statusBadge.textContent = isStale(data.generatedAt) ? "Stale snapshot" : "Fresh snapshot";
+  updateStaleNotice(data.generatedAt);
   els.profileRangeLink.href = `https://github.com/${subject.login || "steipete"}?tab=overview&from=${model.from}&to=${model.to}`;
+}
+
+function updateStaleNotice(generatedAt) {
+  const generatedMs = generatedAt ? new Date(generatedAt).getTime() : NaN;
+  const stale = Number.isFinite(generatedMs) && Date.now() - generatedMs > STALE_NOTICE_MS;
+
+  els.staleNotice.hidden = !stale;
+  els.staleNotice.textContent = stale
+    ? `Stale snapshot: not refreshed since ${formatDate(generatedAt.slice(0, 10))}. All figures are as of that date.`
+    : "";
 }
 
 function updateStats(model) {

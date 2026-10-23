@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#191f1c" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="#f6f8f4"/>
+
+  <!-- Brand row, as in the page header -->
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+    <rect x="64" y="56" width="52" height="52" rx="10" fill="#ffffff" stroke="#d9dfd8" stroke-width="1.5"/>
+    <text x="90" y="90" text-anchor="middle" font-size="19" font-weight="700" fill="#166534">1M</text>
+    <text x="132" y="91" font-size="26" font-weight="700" fill="#171a18">steipete YTD</text>
+  </g>
+
+  <!-- Main card -->
+  <g filter="url(#shadow)">
+    <rect x="64" y="140" width="1072" height="330" rx="12" fill="#ffffff" stroke="#d9dfd8" stroke-width="1.5"/>
+  </g>
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+    <text x="108" y="200" font-size="20" font-weight="700" letter-spacing="2.4" fill="#626b66">GITHUB-VISIBLE YTD CONTRIBUTIONS</text>
+    <text x="104" y="290" font-size="76" font-weight="700" fill="#171a18">Has steipete hit 1M</text>
+    <text x="104" y="376" font-size="76" font-weight="700" fill="#171a18">GitHub contributions?</text>
+
+    <!-- Target line, styled like the page chart's target legend (no live value) -->
+    <line x1="108" y1="420" x2="878" y2="420" stroke="#a16207" stroke-width="3" stroke-dasharray="10 10"/>
+    <text x="1092" y="427" text-anchor="end" font-size="22" font-weight="700" fill="#a16207">target 1,000,000</text>
+  </g>
+
+  <!-- Footer line -->
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+    <text x="64" y="532" font-size="28" font-weight="700" fill="#171a18">Unofficial dashboard by Yossi Eliaz</text>
+    <text x="64" y="572" font-size="22" fill="#626b66">Public GitHub GraphQL data · zozo123.github.io/has-steipete-hit-1m-github-ytd</text>
+  </g>
+</svg>

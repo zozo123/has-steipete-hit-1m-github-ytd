@@ -1,12 +1,25 @@
 # Has steipete hit 1M GitHub YTD?
 
-Static GitHub Pages dashboard for tracking whether
-[`steipete`](https://github.com/steipete) has crossed 1,000,000 GitHub-visible
-contributions in the current year.
+An unofficial dashboard, live at
+[zozo123.github.io/has-steipete-hit-1m-github-ytd](https://zozo123.github.io/has-steipete-hit-1m-github-ytd/),
+that tracks whether GitHub user [`steipete`](https://github.com/steipete) has
+reached 1,000,000 GitHub-visible contributions in the current year. Built by
+Yossi Eliaz from public GitHub GraphQL data; not affiliated with Peter
+Steinberger.
 
 The page is static, but the data is refreshed by GitHub Actions. The workflow
 queries GitHub GraphQL for `user.contributionsCollection`, writes
-`data/steipete.json`, and deploys the site artifact to GitHub Pages.
+`data/steipete.json`, writes the headline answer into `index.html` (so the
+answer is visible without JavaScript), and deploys the site artifact to GitHub
+Pages.
+
+## Status
+
+The data refreshes every 12 hours via GitHub Actions. GitHub pauses the
+schedule after 60 days without repository activity, which happened after the
+Aug 9, 2026 refresh; the workflow has to be re-enabled from the Actions tab
+before the page updates again. The page shows a stale-snapshot notice when its
+data is more than two days old.
 
 ## Local preview
 
@@ -22,22 +35,10 @@ Open `http://localhost:8000`.
 GITHUB_TOKEN="$(gh auth token)" node scripts/fetch-contributions.mjs
 ```
 
-## Publish
+This also updates the static answer in `index.html`. To redo only that step
+from the committed snapshot, run `node scripts/render-static.mjs`.
 
-```sh
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/zozo123/has-steipete-hit-1m-github-ytd.git
-git push -u origin main
-```
-
-Then set the repository Pages source to **GitHub Actions** in
-`Settings -> Pages`.
-
-The scheduled workflow runs every 12 hours and can also be started manually from
-the Actions tab.
+The workflow can also be started manually from the Actions tab.
 
 ## Resilience
 
@@ -58,8 +59,8 @@ A failed build never reaches the deploy job, so the live site keeps serving
 the last good snapshot throughout.
 
 Note: GitHub disables scheduled workflows after 60 days without repository
-activity. If the repo sits untouched that long, any trivial commit revives the
-cron.
+activity. A commit before then resets the timer; after that, re-enable the
+workflow from the Actions tab (see Status).
 
 ## Notes
 

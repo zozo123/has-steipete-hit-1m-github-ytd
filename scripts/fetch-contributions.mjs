@@ -1,4 +1,5 @@
 import { mkdir, writeFile } from "node:fs/promises";
+import { renderStaticPage } from "./render-static.mjs";
 
 const GRAPHQL_ENDPOINT = "https://api.github.com/graphql";
 
@@ -196,3 +197,9 @@ await writeFile(outputPath, `${JSON.stringify(payload, null, 2)}\n`);
 console.log(
   `Wrote ${outputPath}: ${payload.totals.ytd.toLocaleString("en-US")} contributions for ${login} through ${asOfDate}.`,
 );
+
+// index.html always loads data/steipete.json, so only that snapshot is
+// written into the static HTML.
+if (outputPath.replace(/^\.\//, "") === "data/steipete.json") {
+  await renderStaticPage(payload, process.env.STATIC_HTML_PATH || "index.html");
+}
