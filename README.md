@@ -16,10 +16,9 @@ Pages.
 ## Status
 
 The data refreshes every 12 hours via GitHub Actions. GitHub pauses the
-schedule after 60 days without repository activity, which happened after the
-Aug 9, 2026 refresh; the workflow has to be re-enabled from the Actions tab
-before the page updates again. The page shows a stale-snapshot notice when its
-data is more than two days old.
+schedule after 60 days without repository activity. That stopped refreshes
+from Aug 9 to Oct 23, 2026, when a push to `main` restarted them. The page
+shows a stale-snapshot notice when its data is more than two days old.
 
 ## Local preview
 
@@ -59,8 +58,8 @@ A failed build never reaches the deploy job, so the live site keeps serving
 the last good snapshot throughout.
 
 Note: GitHub disables scheduled workflows after 60 days without repository
-activity. A commit before then resets the timer; after that, re-enable the
-workflow from the Actions tab (see Status).
+activity. If that happens, a push to `main` revives the cron (see Status), or
+re-enable the workflow from the Actions tab.
 
 ## Notes
 
